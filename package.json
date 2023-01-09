@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:dev": "nodemon src/index.js",
+    "build": "tsc",
+    "start:dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +20,11 @@
   },
   "homepage": "https://github.com/ar1ra/crud_api#readme",
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "@types/node": "^18.11.18",
+    "@types/uuid": "^9.0.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

@@ -1,4 +1,4 @@
-import http from "http";
+import * as http from "node:http";
 // import cluster from "cluster";
 // import { cpus } from "os";
 import * as dotenv from "dotenv";

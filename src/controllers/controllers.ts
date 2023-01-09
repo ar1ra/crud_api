@@ -1,9 +1,10 @@
-import db from "../db/db.json" assert {type: "json"};
+import { ServerResponse, IncomingMessage } from "node:http";
+import { db } from "../db/db.js";
 import { v4 as uuid } from "uuid";
 import { STATUS_CODES } from "../constants/index.js";
 import { mathId } from "../utils/index.js";
 
-const getAllUsers = (req, res) => {
+const getAllUsers = (req: IncomingMessage, res: ServerResponse) => {
   try {
     return res.writeHead(STATUS_CODES.SUCCESS, {
       "Content-Type": "application/json"
@@ -15,7 +16,7 @@ const getAllUsers = (req, res) => {
   }
 };
 
-const createUser = (req, res) => {
+const createUser = (req: IncomingMessage, res: ServerResponse) => {
   try {
     let body = "";
     req.on("data", (data) => {
@@ -70,7 +71,7 @@ const createUser = (req, res) => {
   }
 };
 
-const getUser = (req, res, id) => {
+const getUser = (req: IncomingMessage, res: ServerResponse, id: string) => {
   try {
     if (mathId(id)) {
       const user = db.find(el => el.id === id);
@@ -95,7 +96,7 @@ const getUser = (req, res, id) => {
   }
 };
 
-const updateUser = (req, res, id) => {
+const updateUser = (req: IncomingMessage, res: ServerResponse, id: string) => {
   try {
     if (mathId(id)) {
       let body = "";
@@ -159,7 +160,7 @@ const updateUser = (req, res, id) => {
   }
 };
 
-const deleteUser = (req, res, id) => {
+const deleteUser = (req: IncomingMessage, res: ServerResponse, id: string) => {
   try {
     if (mathId(id)) {
       const user = db.find(el => el.id === id);
