@@ -1,8 +1,8 @@
 import { ServerResponse, IncomingMessage } from "node:http";
-import { db } from "../db/db.js";
+import { db } from "../db/db";
 import { v4 as uuid } from "uuid";
-import { STATUS_CODES } from "../constants/index.js";
-import { mathId } from "../utils/index.js";
+import { STATUS_CODES } from "../constants/index";
+import { mathId } from "../utils/index";
 
 const getAllUsers = (req: IncomingMessage, res: ServerResponse) => {
   try {
