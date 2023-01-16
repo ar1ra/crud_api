@@ -7,7 +7,6 @@
 ### Launching
    - **npm run start:dev**
    - **npm run start:prod**
-   - **npm run start:multi**
 
 ### Tests
    - **npm run test**
