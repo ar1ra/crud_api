@@ -31,6 +31,16 @@ const createUser = (req: IncomingMessage, res: ServerResponse) => {
             data.age &&
             data.hobbies
           ) {
+            if (
+              typeof data.name !== "string" ||
+              typeof data.age !== "number" ||
+              !Array.isArray(data.hobbies) ||
+              (data.hobbies.length > 0 && data.hobbies.every((hobby: string) => typeof hobby !== "string"))
+            ) {
+              return res.writeHead(STATUS_CODES.BAD_REQUEST, {
+                "Content-Type": "application/json"
+              }).end(JSON.stringify({ message: "Wrong user data" }));
+            }
             const createdUser = {
               id: uuid(),
               ...JSON.parse(body)
@@ -114,6 +124,18 @@ const updateUser = (req: IncomingMessage, res: ServerResponse, id: string) => {
           if (body) {
             try {
               const data = JSON.parse(body);
+
+              if (
+                (data.name && typeof data.name !== "string") ||
+                (data.age && typeof data.age !== "number") ||
+                data.hobbies && (!Array.isArray(data.hobbies) ||
+                  (data.hobbies.every((hobby: string) => typeof hobby !== "string") && data.hobbies.length !== 0))
+              ) {
+                return res.writeHead(STATUS_CODES.BAD_REQUEST, {
+                  "Content-Type": "application/json"
+                }).end(JSON.stringify({ message: "Wrong user data" }));
+              }
+
               const userIndex = db.findIndex(el => el.id === id);
 
               const updatedUser = {
